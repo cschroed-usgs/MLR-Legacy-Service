@@ -1,5 +1,6 @@
 package gov.usgs.wma.mlrlegacy;
 
+import gov.usgs.wma.mlrlegacy.validator.DuplicateMonitoringLocationValidator;
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
@@ -12,7 +13,7 @@ import javax.validation.Constraint;
 @Target(TYPE)
 @Retention(RUNTIME)
 @Constraint(validatedBy={
-	UniqueKeyValidatorForMonitoringLocation.class
+	DuplicateMonitoringLocationValidator.class,
 })
 @Documented
 public @interface UniqueKey {

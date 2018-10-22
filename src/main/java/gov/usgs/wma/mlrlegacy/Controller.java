@@ -44,15 +44,22 @@ public class Controller {
 	public static final String AGENCY_CODE = "agencyCode";
 	public static final String SITE_NUMBER = "siteNumber";
 	public static final String UPDATED_BY = "updatedBy";
+        public static final String DISTRICT_CODE = "districtCode";
+        public static final String STATION_NAME = "stationName";
 
 	@GetMapping()
 	public MonitoringLocation getMonitoringLocations(
-		@RequestParam(name = AGENCY_CODE) String agencyCode,
-		@RequestParam(name = SITE_NUMBER) String siteNumber,
+		@RequestParam(name = AGENCY_CODE, required = false) String agencyCode,
+		@RequestParam(name = SITE_NUMBER, required = false) String siteNumber,
+                @RequestParam(name = DISTRICT_CODE, required = false) String districtCode,
+                @RequestParam(name = STATION_NAME, required = false) String stationName,
 		HttpServletResponse response) {
 		Map<String, Object> params = new HashMap<>();
 		params.put(AGENCY_CODE, agencyCode);
 		params.put(SITE_NUMBER, siteNumber);
+                params.put(DISTRICT_CODE, districtCode);
+                params.put(STATION_NAME, stationName);
+                
 		MonitoringLocation ml = mLDao.getByAK(params);
 		if (null == ml) {
 			response.setStatus(HttpStatus.NOT_FOUND.value());
