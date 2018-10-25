@@ -23,7 +23,7 @@ public class UniqueStationNameValidator extends BaseDuplicateMonitoringLocationV
 
     @Override
     public void setConstraintViolations(MonitoringLocation value, ConstraintValidatorContext context) {
-        String message = String.format("Duplicate Station Name (%s) found.", value.getStationName(), value.getDistrictCode());
+        String message = String.format("Duplicate Station Name (%s) found.", value.getStationName());
         
         context.buildConstraintViolationWithTemplate(message)
                 .addPropertyNode(Controller.STATION_NAME)
