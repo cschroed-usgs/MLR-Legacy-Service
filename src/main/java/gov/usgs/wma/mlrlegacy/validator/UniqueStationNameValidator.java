@@ -10,7 +10,7 @@ import javax.validation.ConstraintValidatorContext;
 import org.springframework.stereotype.Component;
 
 /**
- * Validates that a MonitoringLocation has a unique site name within its district code
+ * Validates that a MonitoringLocation has a unique station name
  */
 @Component
 public class UniqueStationNameValidator extends BaseDuplicateMonitoringLocationValidator {
