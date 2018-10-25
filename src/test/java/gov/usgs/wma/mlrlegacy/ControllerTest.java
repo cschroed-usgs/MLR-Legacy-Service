@@ -15,9 +15,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
@@ -37,10 +35,14 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
 import gov.usgs.wma.mlrlegacy.db.BaseIT;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
-
 @RunWith(SpringRunner.class)
-@WebMvcTest(Controller.class)
+@WebMvcTest(
+        controllers = Controller.class
+        , includeFilters = @ComponentScan.Filter(type = FilterType.REGEX, pattern = "gov\\.usgs\\.wma\\.mlrlegacy.validator.*")
+)
 @AutoConfigureMockMvc(secure=false)
 public class ControllerTest {
 
@@ -116,7 +118,7 @@ public class ControllerTest {
 
 		given(dao.create(any(MonitoringLocation.class))).willReturn(BigInteger.ONE);
 		given(dao.getById(BigInteger.ONE)).willReturn(newMl);
-
+                
 		mvc.perform(post("/monitoringLocations").content(requestBody).contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isCreated())
 				.andExpect(jsonPath("id", is(equalTo(1))))

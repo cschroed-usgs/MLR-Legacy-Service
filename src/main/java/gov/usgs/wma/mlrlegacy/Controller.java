@@ -55,10 +55,19 @@ public class Controller {
                 @RequestParam(name = STATION_NAME, required = false) String stationName,
 		HttpServletResponse response) {
 		Map<String, Object> params = new HashMap<>();
-		params.put(AGENCY_CODE, agencyCode);
-		params.put(SITE_NUMBER, siteNumber);
-                params.put(DISTRICT_CODE, districtCode);
-                params.put(STATION_NAME, stationName);
+		if (null != agencyCode) {
+                    params.put(AGENCY_CODE, agencyCode);
+                }
+                if (null != siteNumber) {
+                    params.put(SITE_NUMBER, siteNumber);
+
+                }
+                if (null != districtCode) {
+                    params.put(DISTRICT_CODE, districtCode);
+                }
+                if (null != stationName) {
+                    params.put(STATION_NAME, stationName);
+                }
                 
 		MonitoringLocation ml = mLDao.getByAK(params);
 		if (null == ml) {
