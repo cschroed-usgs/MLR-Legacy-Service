@@ -21,7 +21,7 @@ public class DuplicateMonitoringLocationValidator extends CompositeConstraintVal
     @Autowired
     public DuplicateMonitoringLocationValidator(
             UniqueAgencyCodeAndSiteNumberValidator uniqueAgencyCodeAndSiteNumberValidator,
-            UniqueDistrictCodeAndStationNameValidator uniqueDistrictCodeAndStationNameValidator
+            UniqueStationNameValidator uniqueDistrictCodeAndStationNameValidator
     ) {
         super(
                 uniqueAgencyCodeAndSiteNumberValidator,
